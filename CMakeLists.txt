@@ -16,8 +16,10 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(${PROJECT_NAME} main.cpp)
-add_executable(${PROJECT_NAME}-ut test.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp
+        src/advancedCalculator.cpp)
+add_executable(${PROJECT_NAME}-ut tests/test.cpp
+        src/advancedCalculator.cpp)
 
 target_link_libraries(${PROJECT_NAME}-ut gtest_main)
 
