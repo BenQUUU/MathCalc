@@ -147,3 +147,19 @@ TEST(advancedCalculatorTest, ShouldReturnBadFormat) {
     ASSERT_EQ(process("12.4.3 + 12.3", &result), ErrorCode::BadFormat);
     ASSERT_EQ(process("123.4 -- 345", &result), ErrorCode::BadFormat);
 }
+
+TEST(advancedCalculatorTest, ShouldReturnBadCharacter) {
+    double result = 0;
+
+    ASSERT_EQ(process("123 #- 123", &result), ErrorCode::BadCharacter);
+    ASSERT_EQ(process("183 @- 223", &result), ErrorCode::BadCharacter);
+    ASSERT_EQ(process("123 &- 123", &result), ErrorCode::BadCharacter);
+    ASSERT_EQ(process("143 ? 123", &result), ErrorCode::BadCharacter);
+    ASSERT_EQ(process("123 \\ 123", &result), ErrorCode::BadCharacter);
+    ASSERT_EQ(process("-123 [ -123", &result), ErrorCode::BadCharacter);
+    ASSERT_EQ(process("-125 ] 113", &result), ErrorCode::BadCharacter);
+    ASSERT_EQ(process("-98 + 12.3 =", &result), ErrorCode::BadCharacter);
+    ASSERT_EQ(process("123 -#- 4", &result), ErrorCode::BadCharacter);
+    ASSERT_EQ(process("qwert + 123", &result), ErrorCode::BadCharacter);
+    ASSERT_EQ(process("193,4 ; 345", &result), ErrorCode::BadCharacter);
+}
